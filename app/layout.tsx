@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CartProvider } from "@/lib/cart";
+import { AuthProvider } from "@/lib/auth";
 import Header from "@/components/Header";
 import "./globals.css";
 
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <AuthProvider>
         <CartProvider>
           <Header />
           <main>{children}</main>
@@ -24,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </footer>
         </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
