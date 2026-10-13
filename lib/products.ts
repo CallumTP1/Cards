@@ -11,6 +11,7 @@ export interface Product {
   price: number; // GBP
   stock: number;
   blurb: string;
+  image?: string; // optional photo URL; falls back to generated art
 }
 
 export const GAMES: Record<Game, { label: string; from: string; to: string; accent: string }> = {
@@ -19,12 +20,18 @@ export const GAMES: Record<Game, { label: string; from: string; to: string; acce
   yugioh: { label: "Yu-Gi-Oh!", from: "#0ea5e9", to: "#6d28d9", accent: "#38bdf8" },
 };
 
+// Official Pokémon card scans from the Pokémon TCG API image host, e.g. ptcg("base1", 4).
+const ptcg = (set: string, num: number | string) => `https://images.pokemontcg.io/${set}/${num}_hires.png`;
+
 // Sample inventory — replace with your real stock (or move to a database later).
 export const PRODUCTS: Product[] = [
-  { id: "poke-charizard-base", name: "Charizard", game: "pokemon", set: "Base Set", rarity: "Holo Rare", condition: "Lightly Played", price: 349.99, stock: 1, blurb: "The grail. Iconic 1999 holo Charizard." },
-  { id: "poke-pikachu-illus", name: "Pikachu Illustrator Promo (Reprint)", game: "pokemon", set: "Promo", rarity: "Promo", condition: "Near Mint", price: 24.5, stock: 6, blurb: "Collector reprint of the legendary promo." },
-  { id: "poke-umbreon-vmax", name: "Umbreon VMAX (Alt Art)", game: "pokemon", set: "Evolving Skies", rarity: "Secret Rare", condition: "Near Mint", price: 289.0, stock: 2, blurb: "Moonlit alternate-art chase card." },
-  { id: "poke-lugia-neo", name: "Lugia", game: "pokemon", set: "Neo Genesis", rarity: "Holo Rare", condition: "Moderately Played", price: 129.0, stock: 3, blurb: "Neo-era classic with a gorgeous holo." },
+  { id: "poke-charizard-base", name: "Charizard", game: "pokemon", set: "Base Set", rarity: "Holo Rare", condition: "Lightly Played", price: 349.99, stock: 1, blurb: "The grail. Iconic 1999 holo Charizard.", image: ptcg("base1", 4) },
+  { id: "poke-pikachu-base", name: "Pikachu", game: "pokemon", set: "Base Set", rarity: "Common", condition: "Near Mint", price: 24.5, stock: 6, blurb: "The classic 1999 red-cheeks Pikachu.", image: ptcg("base1", 58) },
+  { id: "poke-umbreon-vmax", name: "Umbreon VMAX (Alt Art)", game: "pokemon", set: "Evolving Skies", rarity: "Secret Rare", condition: "Near Mint", price: 289.0, stock: 2, blurb: "Moonlit alternate-art chase card.", image: ptcg("swsh7", 215) },
+  { id: "poke-lugia-neo", name: "Lugia", game: "pokemon", set: "Neo Genesis", rarity: "Holo Rare", condition: "Moderately Played", price: 129.0, stock: 3, blurb: "Neo-era classic with a gorgeous holo.", image: ptcg("neo1", 9) },
+  { id: "poke-blastoise-base", name: "Blastoise", game: "pokemon", set: "Base Set", rarity: "Holo Rare", condition: "Moderately Played", price: 159.0, stock: 2, blurb: "Base Set starter powerhouse with Rain Dance.", image: ptcg("base1", 2) },
+  { id: "poke-venusaur-base", name: "Venusaur", game: "pokemon", set: "Base Set", rarity: "Holo Rare", condition: "Lightly Played", price: 119.0, stock: 2, blurb: "The third of the original starter holos.", image: ptcg("base1", 15) },
+  { id: "poke-mewtwo-base", name: "Mewtwo", game: "pokemon", set: "Base Set", rarity: "Holo Rare", condition: "Near Mint", price: 74.0, stock: 3, blurb: "Psychic legend from the original set.", image: ptcg("base1", 10) },
   { id: "poke-booster-151", name: "151 Booster Bundle", game: "pokemon", set: "Scarlet & Violet 151", rarity: "Sealed", condition: "Sealed", price: 28.99, stock: 20, blurb: "Six boosters of the original 151." },
   { id: "poke-mewtwo-ex", name: "Mewtwo ex", game: "pokemon", set: "Scarlet & Violet 151", rarity: "Special Illustration Rare", condition: "Near Mint", price: 54.0, stock: 4, blurb: "Stunning full-art psychic powerhouse." },
 

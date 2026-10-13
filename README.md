@@ -21,3 +21,13 @@ npm run dev     # http://localhost:3000
 Live site: https://cardss-dusky.vercel.app
 
 <!-- redeploy -->
+
+## Orders & account area
+
+Run `supabase/schema.sql` once in Supabase (SQL Editor → New query → paste → Run). This creates the `orders` table with row-level security so each customer only sees their own orders.
+
+Until Stripe is connected, "Place order" saves an order as `pending` ("Awaiting payment"). Don't take real payments from this flow — prices are sent from the browser; use Stripe Checkout with server-side prices first.
+
+## Product photos
+
+Set `image` on a product in `lib/products.ts` (see `ptcg("base1", 4)` for Pokémon card scans). If an image fails to load, generated card art is shown instead.

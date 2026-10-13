@@ -1,10 +1,18 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/cart";
+import { useAuth } from "@/lib/auth";
+import { placeOrder } from "@/lib/orders";
 import { getProduct, gbp } from "@/lib/products";
 
 export default function CartPage() {
-  const { lines, total, setQty } = useCart();
+  const { lines, total, setQty, clear } = useCart();
+  const { user, loading } = useAuth();
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
   const rows = Object.entries(lines).flatMap(([id, qty]) => {
     const p = getProduct(id);
     return p ? [{ p, qty }] : [];
@@ -39,9 +47,23 @@ export default function CartPage() {
         <div className="cart-total">
           <span>Subtotal</span><strong>{gbp(total)}</strong>
         </div>
-        <button className="btn btn-primary" onClick={() => alert("Checkout isn't connected yet — add Stripe to take payments.")}>
-          Checkout
+        {error && <p className="error">{error}</p>}
+        <button
+          className="btn btn-primary"
+          disabled={busy || loading}
+          onClick={async () => {
+            if (!user) return router.push("/login");
+            setBusy(true); setError("");
+            const { error } = await placeOrder(rows.map(({ p, qty }) => ({ id: p.id, name: p.name, qty, price: p.price })), total);
+            setBusy(false);
+            if (error) return setError(/does not exist|schema cache/i.test(error) ? "Orders aren't switched on yet (database table missing)." : error);
+            clear();
+            router.push("/account/orders");
+          }}
+        >
+          {busy ? "Placing order…" : user ? "Place order" : "Log in to check out"}
         </button>
+        <p className="muted">Online payment isn&apos;t connected yet — orders are saved as &ldquo;Awaiting payment&rdquo;.</p>
       </div>
     </div>
   );
