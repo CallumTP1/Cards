@@ -19,3 +19,5 @@ npm run dev     # http://localhost:3000
 4. Supabase → Authentication → URL Configuration: set Site URL to your Vercel URL and add `https://YOUR-SITE.vercel.app/**` to Redirect URLs.
 
 Live site: https://cardss-dusky.vercel.app
+
+<!-- redeploy -->
