@@ -17,3 +17,5 @@ npm run dev     # http://localhost:3000
 2. Project Settings → API: copy the Project URL and the `anon` public key.
 3. Add them as `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` (copy `.env.example` to `.env.local` locally, and add them under Vercel → Settings → Environment Variables).
 4. Supabase → Authentication → URL Configuration: set Site URL to your Vercel URL and add `https://YOUR-SITE.vercel.app/**` to Redirect URLs.
+
+Live site: https://cardss-dusky.vercel.app
