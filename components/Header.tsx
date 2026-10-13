@@ -17,9 +17,9 @@ export default function Header() {
           <Link href="/shop?game=yugioh">Yu-Gi-Oh!</Link>
         </nav>
         <div className="header-right">
-          {!loading && (user
+          {user && !loading
             ? <Link href="/account">Account</Link>
-            : <><Link href="/login">Log in</Link><Link href="/signup" className="btn btn-primary btn-sm">Sign up</Link></>)}
+            : <><Link href="/login">Log in</Link><Link href="/signup" className="btn btn-primary btn-sm">Sign up</Link></>}
         <Link href="/cart" className="cart-link">Cart{count > 0 && <b>{count}</b>}</Link>
         </div>
       </div>

@@ -14,6 +14,7 @@ export default function Home() {
           <div className="hero-cta">
             <Link href="/shop" className="btn btn-primary">Shop all cards</Link>
             <Link href="/shop?game=pokemon" className="btn">Browse Pokémon</Link>
+            <Link href="/signup" className="btn">Create an account</Link>
           </div>
         </div>
       </section>
