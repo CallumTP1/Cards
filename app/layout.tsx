@@ -19,11 +19,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main>{children}</main>
           <footer className="footer">
-            <div className="container">
-              <span>◆ CardVault © {new Date().getFullYear()}</span>
-              <span className="muted">Not affiliated with Nintendo, Wizards of the Coast or Konami.</span>
-              <Link href="/shop">Shop all</Link>
+            <div className="container footer-in">
+              <div><b>◆ CardVault</b><p className="muted">Pokémon, Magic: The Gathering &amp; Yu-Gi-Oh! cards.</p></div>
+              <div><b>Shop</b><Link href="/shop?game=pokemon">Pokémon</Link><Link href="/shop?game=mtg">Magic</Link><Link href="/shop?game=yugioh">Yu-Gi-Oh!</Link></div>
+              <div><b>Account</b><Link href="/login">Log in</Link><Link href="/signup">Sign up</Link><Link href="/cart">Cart</Link></div>
             </div>
+            <div className="container footer-legal">© {new Date().getFullYear()} CardVault. Not affiliated with Nintendo, Wizards of the Coast or Konami.</div>
           </footer>
         </CartProvider>
         </AuthProvider>
